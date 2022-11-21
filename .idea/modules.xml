@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Homework24/Homework24.iml" filepath="$PROJECT_DIR$/Homework24/Homework24.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Misaki/Misaki.iml" filepath="$PROJECT_DIR$/Misaki/Misaki.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../Test_books/Test_books.iml" filepath="$PROJECT_DIR$/../Test_books/Test_books.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day23_servlet/day23_servlet.iml" filepath="$PROJECT_DIR$/day23_servlet/day23_servlet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day24_RegisterAndLogin/day24_RegisterAndLogin.iml" filepath="$PROJECT_DIR$/day24_RegisterAndLogin/day24_RegisterAndLogin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day24_requestAndresponse/day24_requestAndresponse.iml" filepath="$PROJECT_DIR$/day24_requestAndresponse/day24_requestAndresponse.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day25_RegisterAndLogin/day25_RegisterAndLogin.iml" filepath="$PROJECT_DIR$/day25_RegisterAndLogin/day25_RegisterAndLogin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day25_cookieAndSession/day25_cookieAndSession.iml" filepath="$PROJECT_DIR$/day25_cookieAndSession/day25_cookieAndSession.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day26_brand_demo/day26_brand_demo.iml" filepath="$PROJECT_DIR$/day26_brand_demo/day26_brand_demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day27_RegisterAndLogin/day27_RegisterAndLogin.iml" filepath="$PROJECT_DIR$/day27_RegisterAndLogin/day27_RegisterAndLogin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day27_brandDemo/day27_brandDemo.iml" filepath="$PROJECT_DIR$/day27_brandDemo/day27_brandDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day27_filter_listener_ajax_axios_json/day27_filter_listener_ajax_axios_json.iml" filepath="$PROJECT_DIR$/day27_filter_listener_ajax_axios_json/day27_filter_listener_ajax_axios_json.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day28_Vue/day28_Vue.iml" filepath="$PROJECT_DIR$/day28_Vue/day28_Vue.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day28_brandDemo/day28_brandDemo.iml" filepath="$PROJECT_DIR$/day28_brandDemo/day28_brandDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day29_brandDemo/day29_brandDemo.iml" filepath="$PROJECT_DIR$/day29_brandDemo/day29_brandDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day30_brandDemo/day30_brandDemo.iml" filepath="$PROJECT_DIR$/day30_brandDemo/day30_brandDemo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../day31_Demo/day31_Demo.iml" filepath="$PROJECT_DIR$/../day31_Demo/day31_Demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day31_spring/day31_demo1_ioc/day31_demo1_ioc.iml" filepath="$PROJECT_DIR$/day31_spring/day31_demo1_ioc/day31_demo1_ioc.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day31_spring/day31_demo2_di/day31_demo2_di.iml" filepath="$PROJECT_DIR$/day31_spring/day31_demo2_di/day31_demo2_di.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day31_spring/day31_demo3_di/day31_demo3_di.iml" filepath="$PROJECT_DIR$/day31_spring/day31_demo3_di/day31_demo3_di.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day31_spring/day31_spring.iml" filepath="$PROJECT_DIR$/day31_spring/day31_spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo1_annotation/day32_demo1_annotation.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo1_annotation/day32_demo1_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo2_annotation/day32_demo2_annotation.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo2_annotation/day32_demo2_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo3_annotation_pure/day32_demo3_annotation_pure.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo3_annotation_pure/day32_demo3_annotation_pure.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo4_mybatis/day32_demo4_mybatis.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo4_mybatis/day32_demo4_mybatis.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo5_mybatis_xml/day32_demo5_mybatis_xml.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo5_mybatis_xml/day32_demo5_mybatis_xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo6_mybatis_annotation/day32_demo6_mybatis_annotation.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo6_mybatis_annotation/day32_demo6_mybatis_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_demo7_junit/day32_demo7_junit.iml" filepath="$PROJECT_DIR$/day32_spring/day32_demo7_junit/day32_demo7_junit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day32_spring/day32_spring.iml" filepath="$PROJECT_DIR$/day32_spring/day32_spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day33_spring/day33_demo1_aop_xml/day33_demo1_aop_xml.iml" filepath="$PROJECT_DIR$/day33_spring/day33_demo1_aop_xml/day33_demo1_aop_xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day33_spring/day33_demo2_aop_annotation/day33_demo2_aop_annotation.iml" filepath="$PROJECT_DIR$/day33_spring/day33_demo2_aop_annotation/day33_demo2_aop_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day33_spring/day33_demo3_transaction_xml/day33_demo3_transaction_xml.iml" filepath="$PROJECT_DIR$/day33_spring/day33_demo3_transaction_xml/day33_demo3_transaction_xml.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day33_spring/day33_demo4_transaction_annotation/day33_demo4_transaction_annotation.iml" filepath="$PROJECT_DIR$/day33_spring/day33_demo4_transaction_annotation/day33_demo4_transaction_annotation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/day33_spring/day33_spring.iml" filepath="$PROJECT_DIR$/day33_spring/day33_spring.iml" />
+      <module fileurl="file://$PROJECT_DIR$/work/work.iml" filepath="$PROJECT_DIR$/work/work.iml" />
+    </modules>
+  </component>
+</project>

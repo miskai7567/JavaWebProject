@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <ul>
+        <li v-for="element in arr">{{element}}</li>
+    </ul>
+
+    <ol>
+        <li v-for="(element,index) in arr">{{element}}---{{index}}</li>
+    </ol>
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            arr:["itheima","itcast",100]
+        },
+        methods:{}
+    });
+</script>
+</body>
+</html>

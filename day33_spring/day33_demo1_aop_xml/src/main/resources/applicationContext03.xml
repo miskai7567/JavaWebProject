@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--1. 把这两个类都交给spring管理-->
+    <bean id="us" class="com.itheima.service.impl.UserServiceImpl"/>
+    <bean id="myAdvice" class="com.itheima.advice.MyAdvice"/>
+
+    <!--
+        2. 配置AOP
+            aop:config: 用来配置AOP
+              aop:aspect ： 用来配置切面 【切面就是用来包裹：扩展出来的的功能方法和被扩展的方法】
+                ref: 扩展出来的那个功能类的对象 id值。
+              aop:before: 表示前置增强 【 调用目标方法之前，先调用扩展出来的功能方法！】
+                method：想用扩展出来的功能类中的什么方法来做增强。 print方法
+                pointcut : 描述切入点，具体是哪个方法想要被增强 【可以是一个方法、一类方法、所有方法】
+    -->
+    <aop:config>
+        <aop:aspect ref="myAdvice">
+
+            <!--前置通知：在调用目标方法之前，先调用通知的方法-->
+            <!--<aop:before method="before" pointcut="execution( * com.itheima..*.*(..))"/>-->
+
+            <!--后置通知：在调用目标方法之后，再调用通知的方法-->
+            <!--<aop:after method="after" pointcut="execution( * com.itheima..*.*(..))"/>-->
+
+            <!--返回后通知：在调用目标方法之后，再调用通知的方法-->
+            <!--<aop:after-returning method="afterReturning" pointcut="execution( * com.itheima..*.*(..))"/>-->
+
+            <!--异常通知：在调用目标方法出现异常的时候，才调用通知的方法-->
+            <!--<aop:after-throwing method="afterThrowing" pointcut="execution( * com.itheima..*.*(..))"/>-->
+
+            <!--环绕通知：在前面和后面都增强，但是是由指定的通知方法去控制-->
+            <aop:around method="around" pointcut="execution( * com.itheima..*.*(..))"/>
+        </aop:aspect>
+
+    </aop:config>
+</beans>

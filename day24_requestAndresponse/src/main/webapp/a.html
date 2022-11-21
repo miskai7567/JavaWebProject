@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+问题: 如何在html页面中访问Servlet
+解决: 使用Servlet的绝对路径或者相对路径
+Servlet绝对路径:有协议,ip地址和端口号的完整路径,其实协议和ip地址以及端口号可以省略不写,/开头
+Servlet相对路径:相对当前页面的路径
+    a.html:  http://localhost:8080/day24/index.html
+    ServletDemo2:http://localhost:8080/day24/ServletDemo2
+    相对路径: 去掉公共部分,上一层路径使用../表示,当前层路径使用./表示(省略不写)
+
+    以后: 可以使用绝对路径,也可以相对路径
+-->
+<h1>操作请求头</h1>
+<a href="http://localhost:8080/day24/ServletDemo2">绝对路径访问ServletDemo2</a><br/>
+<a href="/day24/ServletDemo2">绝对路径访问ServletDemo2</a><br/>
+<a href="ServletDemo2">相对路径访问ServletDemo2</a><br/>
+
+<hr/>
+
+<h1>操作请求体</h1>
+<form action="ServletDemo3" method="get">
+    用户名:<input type="text" name="username"><br/>
+    密码:<input type="password" name="password"><br/>
+    爱好:
+    <input type="checkbox" name="hobby" value="basketball">篮球
+    <input type="checkbox" name="hobby" value="football">足球
+    <input type="checkbox" name="hobby" value="code">敲代码<br/>
+    <input type="submit">
+</form>
+<hr/>
+<h1>操作请求体</h1>
+<form action="ServletDemo4" method="get">
+    用户名:<input type="text" name="username"><br/>
+    密码:<input type="password" name="password"><br/>
+    爱好:
+    <input type="checkbox" name="hobby" value="basketball">篮球
+    <input type="checkbox" name="hobby" value="football">足球
+    <input type="checkbox" name="hobby" value="code">敲代码<br/>
+    <input type="submit">
+</form>
+
+
+</body>
+</html>

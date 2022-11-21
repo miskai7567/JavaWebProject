@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .el-table .warning-row {
+            background: oldlace;
+        }
+
+        .el-table .success-row {
+            background: #f0f9eb;
+        }
+    </style>
+<script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="app">
+
+    <!--搜索表单-->
+    <el-form :inline="true" :model="brandForm" class="demo-form-inline">
+
+        <el-form-item label="当前状态">
+            <el-select v-model="brandForm.status" placeholder="当前状态">
+                <el-option label="启用" value="1"></el-option>
+                <el-option label="禁用" value="0"></el-option>
+            </el-select>
+        </el-form-item>
+
+        <el-form-item label="企业名称">
+            <el-input v-model="brandForm.companyName" placeholder="企业名称"></el-input>
+        </el-form-item>
+
+        <el-form-item label="品牌名称">
+            <el-input v-model="brandForm.brandName" placeholder="品牌名称"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+        </el-form-item>
+    </el-form>
+
+    <!--按钮-->
+    <el-row>
+
+        <el-button type="danger" plain @click="batchDeleteBrand()">批量删除</el-button>
+        <el-button type="primary" plain @click="openDialog()">新增</el-button>
+
+    </el-row>
+
+    <!--添加数据对话框表单-->
+    <el-dialog
+            title="编辑品牌"
+            :visible.sync="dialogVisible"
+            width="30%"
+            >
+
+        <!--
+            现象: 添加一次之后,不刷新brand.html页面,再次打开添加品牌的对话框,对话框中有前一次添加的数据
+            原因:对话框中的表单和brand数据模型进行了绑定,第一次添加品牌的时候,就把数据赋值给了brand数据模型,那么第二次打开对话框中的表单的时候
+            这个表单就已经获取到了brand数据模型中的数据(也就是第一次添加的数据)
+            解决: 第二次打开的时候,要清空brand数据模型中的数据
+                1.为新增按钮绑定点击事件,执行对应的函数
+                2.在函数中,先清空brand数据模型中的数据,然后打开对话框
+
+        -->
+
+        <el-form ref="form" :model="brand" label-width="80px">
+            <el-form-item label="品牌名称">
+                <el-input v-model="brand.brandName"></el-input>
+            </el-form-item>
+
+            <el-form-item label="企业名称">
+                <el-input v-model="brand.companyName"></el-input>
+            </el-form-item>
+
+            <el-form-item label="排序">
+                <el-input v-model="brand.ordered"></el-input>
+            </el-form-item>
+
+            <el-form-item label="备注">
+                <el-input type="textarea" v-model="brand.description"></el-input>
+            </el-form-item>
+
+            <el-form-item label="状态">
+                <el-switch v-model="brand.status"
+                           :active-value="1"
+                           :inactive-value="0">
+                <!--    显示状态,必须为active-value,inactive-value属性绑定值-->
+
+                </el-switch>
+            </el-form-item>
+
+
+            <el-form-item>
+                <el-button type="primary" @click="submit()">提交</el-button>
+                <el-button @click="dialogVisible = false">取消</el-button>
+            </el-form-item>
+        </el-form>
+
+    </el-dialog>
+
+    <!--表格-->
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange"
+        >
+            <el-table-column
+                    type="selection"
+                    width="55">
+            </el-table-column>
+            <el-table-column
+                    type="index"
+                    width="50">
+            </el-table-column>
+
+            <el-table-column
+                    prop="brandName"
+                    label="品牌名称"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="companyName"
+                    label="企业名称"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="ordered"
+                    align="center"
+                    label="排序">
+            </el-table-column>
+            <el-table-column
+                    prop="statusStr"
+                    align="center"
+                    label="当前状态">
+            </el-table-column>
+
+            <el-table-column
+                    align="center"
+                    label="操作">
+
+                <template slot-scope="scope">
+                    <el-button type="primary"
+                               size="mini"
+                               @click="updateBrand(scope.row)">修改</el-button>
+
+                    <el-button
+                            size="mini"
+                            type="danger"
+                            @click="deleteBrand(scope.row.id)">删除</el-button>
+                </template>
+
+            </el-table-column>
+
+        </el-table>
+    </template>
+
+    <!--分页工具条-->
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            :page-size="pageSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="totalCount">
+    </el-pagination>
+
+</div>
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script>
+    new Vue({
+        el: "#app",
+        methods: {
+            // 对话框的提交按钮触发的函数
+            submit(){
+                // 判断是新增还是修改
+                console.log(this.brand);
+                if (this.brand.id){
+                    // 修改
+                    // 携带修改之后的数据,发送异步请求到服务器
+                    console.log("修改...");
+                    axios.post("brand/updateBrand",this.brand).then(response=>{
+                        console.log(response.data);
+                        if (response.data == "success"){
+                            // 关闭对话框
+                            this.dialogVisible = false;
+                            // 显示成功信息提示框
+                            this.$message({
+                                message: '恭喜你，修改成功',
+                                type: 'success'
+                            });
+                            // 刷新页面---分页请求
+                            this.findPage();
+                        }else{
+                            // 关闭对话框
+                            this.dialogVisible = false;
+                            // 显示失败信息提示框
+                            this.$message.error('很遗憾,修改失败');
+                        }
+                    })
+
+                }else{
+                    // 新增
+                    this.addBrand();
+                }
+            },
+            // 修改--- 数据回显
+            updateBrand(row){
+                console.log(row);
+
+                // 弹出修改的对话框
+                this.dialogVisible = true;
+
+                // 把数据回显到对话框中
+                // this.brand = row;// 这样赋值是有问题的,对话框中的数据变化了,表格中的数据也会变化
+                // 问题:对话框中的数据变化了,表格中的数据也会变化
+                // 原因:row获取的是表格中的js对象(也就是tableData数据模型中的对象),
+                //      所以这里就是把表格中的对象赋值给brand数据模型,brand数据模型和row是同一个对象,所以brand数据模型变化了,表格中的那个对象也会变化
+                // 例如:
+                // Person p1 = new Person(18);   Person p2 = new Person(20);
+                // tableDate数组= {p1,p2}
+                // Person p = p1;
+                // 修改p对象中的age为28--->p1对象中的age为28---->因为p和p1指向的是同一个对象
+
+                // 方式一: 获取row对象中的属性值,赋值给brand数据模型中的属性值
+                /*this.brand.brandName = row.brandName;
+                this.brand.companyName = row.companyName;
+                this.brand.ordered = row.ordered;
+                this.brand.description = row.description;
+                this.brand.status = row.status;*/
+
+                // 方式二: 先把row对象转换为字符串,再把字符串转换为js对象(新的对象)
+                this.brand = JSON.parse(JSON.stringify(row));
+
+            },
+            // 删除
+            deleteBrand(id){
+                console.log(id);
+                // 弹出删除确认框
+                var flag = confirm("确定要删除id为"+id+"的记录吗?");
+
+                // 如果确定要删除,就携带id,发送异步请求
+                if (flag){
+                    axios.get("brand/deleteBrand?id="+id).then(response=>{
+                        if (response.data == "success"){
+                            // 显示成功信息提示框
+                            this.$message({
+                                message: '恭喜你，删除成功',
+                                type: 'success'
+                            });
+                            // 刷新页面---分页请求
+                            this.findPage();
+                        }else{
+                            // 显示失败信息提示框
+                            this.$message.error('很遗憾,删除失败');
+                        }
+                    })
+                }
+            },
+            // 分页查询
+            findPage(){
+                //发送异步请求,传入当前页码和每页显示的条数(先默认写死当前页码为1,每页显示的条数为5)
+                axios.get("brand/findPage?currentPage="+this.currentPage+"&pageSize="+this.pageSize).then(response=>{
+                    console.log(response.data);
+                    // 把当前页的数据显示到表格中---当前页的数据赋值给表格的数据模型
+                    this.tableData = response.data.list ;
+                    // 把总记录数显示到分页条----总记录数赋值给totalCount数据模型
+                    this.totalCount = response.data.totalCount;
+                })
+            }
+
+            ,
+            // 批量删除
+            batchDeleteBrand(){
+                // 1.获取所有选择记录的id
+                // 1.1 定义一个js数组对象
+                var ids = [];
+                // 1.2 循环遍历multipleSelection数据模型
+                for (let i = 0; i < this.multipleSelection.length; i++) {
+                    // 1.3 获取id,存储到数组中
+                    ids[i] = this.multipleSelection[i].id;
+                }
+                console.log(ids);
+
+                // 有勾选才去发请求---否则会删除所有记录
+                if (ids.length > 0){
+                    // 发送异步请求,携带所有要删除的记录的id
+                    axios.post("brand/batchDeleteBrand",ids).then(response=>{
+                        // console.log(response.data);
+                        if (response.data == "success"){
+                            // 弹出成功提示框
+                            this.$message({
+                                message: '恭喜你，批量删除成功',
+                                type: 'success'
+                            });
+                            // 查询所有---更新页面
+                            // this.findAll();
+                            // 分页查询
+                            this.findPage();
+                        }else{
+                            // 弹出失败提示框
+                            this.$message.error('很遗憾,批量删除失败');
+                        }
+                    })
+                }
+            }
+            ,
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex === 1) {
+                    return 'warning-row';
+                } else if (rowIndex === 3) {
+                    return 'success-row';
+                }
+                return '';
+            },
+            // 复选框选中后执行的方法
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+
+                console.log(this.multipleSelection)
+            },
+            // 条件查询方法
+            onSubmit() {
+                console.log(this.brandForm);
+                // 设置当前页码默认值为1
+                this.currentPage = 1;
+
+                // 发送异步请求--携带当前页码,每页显示的条数,条件对象
+                this.findPageByCondition();
+            },
+
+            findPageByCondition(){
+                axios.post("brand/findPageByCondition?currentPage="+this.currentPage+"&pageSize="+this.pageSize,this.brandForm).then(response=>{
+                    // console.log(response.data);
+                    // 把条件查询出来的数据显示到表格中
+                    this.tableData = response.data.list;
+                    // 把总记录数显示到分页条中
+                    this.totalCount = response.data.totalCount;
+                })
+            }
+            ,
+            // 添加数据
+            addBrand(){
+                console.log(this.brand);
+                // 发送请求,携带数据
+                axios.post("brand/addBrand",this.brand).then(response=>{
+                    // console.log(response.data);
+                    if (response.data == "success") {
+                        // 如果添加成功---1.关闭对话框;  2.弹出添加成功提示框;  3.刷新页面刷新页面中的表格数据
+                        //1.关闭对话框;
+                        this.dialogVisible = false;
+
+                        //2.弹出添加成功提示框;
+                        this.$message({
+                            message: '恭喜你，添加成功',
+                            type: 'success'
+                        });
+
+                        // 3.刷新页面中的表格数据----查询所有
+                        // this.findAll();
+                        // 分页查询
+                        this.findPage();
+                    }else {
+                        // 如果添加失败---1.关闭对话框;  2.弹出添加失败提示框;
+                        this.dialogVisible = false;
+                        this.$message.error('很遗憾,添加失败');
+                    }
+                })
+            },
+
+            //分页
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+
+                // 修改pageSize数据模型的数据
+                this.pageSize = val;
+
+                // 设置当前页码为1
+                this.currentPage = 1;
+
+                // 调用分页查询的函数,查询当前页的数据
+                if (this.brandForm.status != null || this.brandForm.brandName != null || this.brandForm.companyName != null) {
+                    // 如果是根据条件分页查询,就调用条件分页查询的函数
+                    this.findPageByCondition();
+                }else {
+                    // 如果不是根据条件分页查询,就调用分页查询的函数
+                    this.findPage();
+                }
+
+
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+
+                // 把当前页码赋值给currentPage数据模型
+                this.currentPage = val;
+
+                // 调用分页查询的函数,查询当前页的数据
+                if (this.brandForm.status != null || this.brandForm.brandName != null || this.brandForm.companyName != null) {
+                    // 如果是根据条件分页查询,就调用条件分页查询的函数
+                    this.findPageByCondition();
+                }else {
+                    // 如果不是根据条件分页查询,就调用分页查询的函数
+                    this.findPage();
+                }
+            },
+
+            // 查询所有
+            findAll(){
+                axios.get("brand/selectAll").then(response=>{
+                    // console.log(response.data);
+                    this.tableData = response.data;
+                })
+            },
+            openDialog(){
+                // 1.清空brand数据模型中的数据
+                this.brand = {
+                    status: 0,
+                    brandName: '',
+                    companyName: '',
+                    id:"",
+                    ordered:"",
+                    description:""
+                };
+
+                // 2.打开对话框
+                this.dialogVisible = true;
+
+            }
+
+        },
+        data() {
+            return {
+
+                // 每页显示的条数
+                pageSize : 5,
+                // 总记录数
+                totalCount: 400,
+
+                // 当前页码
+                currentPage: 1,
+                // 添加数据对话框是否展示的标记
+                dialogVisible: false,
+
+                // 搜索表单的品牌模型数据
+                brandForm: {
+                    status: '',
+                    brandName: '',
+                    companyName: '',
+                    id:"",
+                    ordered:"",
+                    description:""
+                },
+
+                // 品牌模型数据
+                brand: {
+                    status: '',
+                    brandName: '',
+                    companyName: '',
+                    id:"",
+                    ordered:"",
+                    description:""
+                },
+                // 复选框选中数据集合
+                multipleSelection: [],
+                // 表格数据
+                tableData: []
+            }
+        },
+        mounted(){
+            // 发送异步请求
+            /*axios.get("findAll").then(response=>{
+                // console.log(response.data);
+                this.tableData = response.data;
+            })*/
+
+            // 查询所有
+            // this.findAll();
+
+            // 分页查询
+            this.findPage();
+        }
+    })
+
+</script>
+
+</body>
+</html>

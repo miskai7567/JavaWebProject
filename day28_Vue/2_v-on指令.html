@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <input type="button" value="点击事件1" v-on:click="f1()"/>
+    <input type="button" value="点击事件2" @click="f2()"/>
+    <input type="text" @blur="f3()"/>
+</div>
+
+<script>
+    // 创建Vue对象
+    new Vue({
+        el:"#app",
+        data:{
+
+        },
+        methods:{
+            // 函数和函数之间使用逗号隔开
+            f1() {
+                alert("我被点击了...")
+            },
+            f2:function () {
+                alert("我也被点击了...")
+            },
+            f3(){
+                console.log("失去焦点...");
+            }
+        }
+    });
+
+
+</script>
+</body>
+</html>

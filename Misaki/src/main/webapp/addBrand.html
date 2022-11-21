@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>添加品牌</title>
+    <script src="js/axios-0.18.0.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>添加品牌</h3>
+    <form action="" method="post">
+        品牌名称：<input id="brandName" name="brandName" v-model="brand.brandName"><br>
+        企业名称：<input id="companyName" name="companyName" v-model="brand.companyName"><br>
+        排序：<input id="ordered" name="ordered" v-model="brand.ordered"><br>
+        描述信息：<textarea rows="5" cols="20" id="description" name="description" v-model="brand.description"></textarea><br>
+        状态：
+        <input type="radio" name="status" value="0" v-model="brand.status">禁用
+        <input type="radio" name="status" value="1" v-model="brand.status">启用<br>
+
+        <input type="button" id="btn"  value="提交" @click="addBrand()">
+    </form>
+</div>
+
+
+<script>
+    new Vue({
+            el:"#app",
+            data:{
+                brand:{
+                    brandName:'',
+                    companyName:'',
+                    ordered:'',
+                    description:'',
+                    status:''
+                }
+            },
+            methods:{addBrand(){
+                    console.log(this.brand);
+                    axios.post("AddBrandServlet",this.brand).then(response=>{
+                        if(response.data=="success"){
+                            location.href="brand.html"
+                        }
+                    })
+                }},
+            mounted(){}
+        });
+
+
+
+
+
+
+
+
+
+
+    // function addBrand() {
+    //
+    //     // 定义一个js对象,用来存储表单数据
+    //     var jsData = {
+    //         brandName: "",
+    //         companyName: "",
+    //         ordered: "",
+    //         description: "",
+    //         status: "",
+    //     };
+    //
+    //     // 获取表单数据,赋值给jsData对象的属性
+    //     jsData.brandName = document.getElementById("brandName").value
+    //     jsData.companyName = document.getElementById("companyName").value
+    //     jsData.ordered = document.getElementById("ordered").value
+    //     jsData.description = document.getElementById("description").value
+    //     // 方式一:
+    //     // document.getElementsByName("status")  获取了2个单选框
+    //     // document.getElementsByName("status")[0] 获取禁用的单选框
+    //     // document.getElementsByName("status")[0].checked 如果有值说明选择的是禁用单选框
+    //     jsData.status = document.getElementsByName("status")[0].checked ? 0 : 1;
+    //
+    //     // 方式二
+    //     /* for (var i = 0;i<document.getElementsByName("status").length;i++){
+    //          if (document.getElementsByName("status")[i].checked){
+    //              jsData.status = document.getElementsByName("status")[i].value;
+    //          }
+    //      }*/
+    //
+    //     console.log(jsData);
+    //
+    //     // 发送异步请求---传输json格式表单数据---axios里面js对象和json字符串可以自动转换
+    //     axios.post("AddBrandServlet",jsData).then(function (response) {
+    //         // console.log(response.data);
+    //         if (response.data == "success"){
+    //             location.href = "brandOld.html"
+    //         }else{
+    //             alert("很遗憾,添加失败")
+    //         }
+    //     })
+    // }
+</script>
+</body>
+</html>

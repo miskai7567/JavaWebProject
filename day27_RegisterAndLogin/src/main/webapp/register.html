@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册页面</title>
+    <script src="js/axios-0.18.0.js"></script>
+
+</head>
+<body>
+    <center><h1>用户注册</h1>
+    <form action="ServletRegister" method="post">
+        <span id="spanId"></span><br/>
+        姓名:<input type="text" name="username" onblur="checkUsername(this)"><br>
+        密码:<input type="password" name="password"><br>
+        <input type="submit" value="注册">
+    </form>
+    </center>
+
+    <script>
+        function checkUsername(obj) {
+            // 1.获取输入框输入的用户名
+            var username = obj.value;
+
+            // 2.发送axios的异步请求
+            /*axios.get("FindUserServlet?username="+username).then(function (response) {
+                console.log(response);// 返回
+                // var res = JSON.stringify(response.data);  // 把js对象转换为了字符串,然后使用 res == "true"进行比较
+                if ( response.data == true){
+                    document.getElementById("spanId").innerHTML = "<font color='green' size='3'>用户名可用</font>";
+                }else{
+                    document.getElementById("spanId").innerHTML = "<font color='red' size='3'>用户名不可用</font>";
+                }
+            })*/
+
+            axios.post("FindUserServlet","username="+username).then(function (response) {
+                console.log(response);// 返回
+                // var res = JSON.stringify(response.data);  // 把js对象转换为了字符串,然后使用 res == "true"进行比较
+                if ( response.data == true){
+                    document.getElementById("spanId").innerHTML = "<font color='green' size='3'>用户名可用</font>";
+                }else{
+                    document.getElementById("spanId").innerHTML = "<font color='red' size='3'>用户名不可用</font>";
+                }
+            })
+        }
+
+        /*function checkUsername(obj) {
+            // 1.获取输入框输入的用户名
+            var username = obj.value;
+
+            // 2.发送异步请求--- FindUserServlet
+            // 2.1.创建XMLHttpRequest对象
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            } else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+
+            // 2.2 发送请求
+            xmlhttp.open("GET","FindUserServlet?username="+username);
+            xmlhttp.send()
+
+            // 2.3.获取服务器响应的数据----xmlhttp.responseText
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    // console.log(xmlhttp.responseText);
+                    // 判断服务器响应的标识
+                    if (xmlhttp.responseText == "true"){
+                        document.getElementById("spanId").innerHTML = "<font color='green' size='3'>用户名可用</font>";
+                    }else{
+                        document.getElementById("spanId").innerHTML = "<font color='red' size='3'>用户名不可用</font>";
+                    }
+                }
+            }
+        }*/
+    </script>
+</body>
+</html>

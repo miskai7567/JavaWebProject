@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+<a href="addBrand.html">
+    <input type="button" value="新增">
+</a><br>
+<hr>
+<table id="brandTable" border="1" cellspacing="0" width="100%">
+
+
+    <!--<tr align="center">
+        <td>1</td>
+        <td>三只松鼠</td>
+        <td>三只松鼠</td>
+        <td>100</td>
+        <td>三只松鼠，好吃不上火</td>
+        <td>启用</td>
+        <td><a href="#">修改</a> <a href="#">删除</a></td>
+    </tr>-->
+
+</table>
+</body>
+<script>
+    // 页面加载完成就发送异步请求查询所有
+    window.onload = function () {
+        // 发送异步请求---查询所有
+        axios.post("FindAllServlet").then(function (response) {
+            console.log(response.data);
+
+
+            // 定义一个变量,用来存储表格的表头和所有的行数据
+            var tableData = "<tr>\n" +
+                "        <th>序号</th>\n" +
+                "        <th>品牌名称</th>\n" +
+                "        <th>企业名称</th>\n" +
+                "        <th>排序</th>\n" +
+                "        <th>品牌介绍</th>\n" +
+                "        <th>状态</th>\n" +
+                "        <th>操作</th>\n" +
+                "    </tr>";
+
+            for (let i = 0;i<response.data.length;i++){
+                // 获取数组中的一个元素---brand对象
+                var brand = response.data[i];
+
+                var  status = "";
+                /*if (brand.status == 0){
+                    status = "禁用"
+                }else{
+                    status = "启用";
+                }*/
+
+                status = brand.status == 0 ? "禁用" : "启用";
+
+                tableData += "<tr align=\"center\">\n" +
+                    "        <td>"+brand.id+"</td>\n" +
+                    "        <td>"+brand.brandName+"</td>\n" +
+                    "        <td>"+brand.companyName+"</td>\n" +
+                    "        <td>"+brand.ordered+"</td>\n" +
+                    "        <td>"+brand.description+"</td>\n" +
+                    "        <td>"+status+"</td>\n" +
+                    "        <td><a href=\"#\">修改</a> <a href=\"#\">删除</a></td>\n" +
+                    "    </tr>";
+            }
+
+            // document.getElementById("brandTable").innerHTML = "表格的表头和所有的行数据";
+            document.getElementById("brandTable").innerHTML = tableData;
+        })
+    }
+</script>
+</html>

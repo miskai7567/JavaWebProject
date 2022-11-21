@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //JSON字符串和JS对象转化
+
+    // js--->json
+    var js = {
+        username:"zhangsan",
+        password: "1233456",
+        id: 1
+    };
+
+    var jsonS = JSON.stringify(js);
+    console.log(jsonS);
+    /*
+        {"username":"zhangsan","password":"1233456","id":1}
+    */
+    console.log(js);
+    /*
+        Object
+            id: 1
+            password: "1233456"
+            username: "zhangsan"
+            [[Prototype]]: Object
+     */
+
+    console.log("---------------------------");
+
+    // json--->js
+    var jsonStr = "{\"username\":\"zhangsan\",\"password\":\"1233456\",\"id\":1}";
+    var jsObj = JSON.parse(jsonStr);
+    console.log(jsObj);
+
+</script>
+</body>
+</html>

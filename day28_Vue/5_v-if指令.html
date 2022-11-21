@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <!--根据count的值显示对应的字体标签-->
+    <font color="red" v-if="count == 1">字体标签1</font><br/>
+    <font color="blue" v-if="count == 2">字体标签2</font><br/>
+    <font color="green" v-if="count == 3">字体标签3</font><br/>
+
+
+    <font color="red" v-if="count == 1">字体标签1</font>
+    <font color="blue" v-else-if="count == 2">字体标签2</font>
+    <font color="green" v-else>字体标签3</font>
+
+    <div v-if="count == 1">div1</div>
+    <div v-else-if="count == 2">div2</div>
+    <div v-else>div3</div>
+
+
+    <font color="red" v-show="count == 1">字体标签1</font><br/>
+    <font color="blue" v-show="count == 2">字体标签2</font><br/>
+    <font color="green" v-show="count == 3">字体标签3</font><br/>
+
+</div>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            count: 2
+        },
+        methods: {}
+    });
+</script>
+</body>
+</html>

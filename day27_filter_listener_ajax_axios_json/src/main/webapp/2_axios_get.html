@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+<input type="button" value="发送axios的get请求" onclick="f1()">
+<script>
+    function f1() {
+        // 发送axios的get请求
+        axios({
+            method:"get",
+            url:"AxiosServlet?username=zs"
+        }).then(function (response) {
+            // then是一个回调函数,响应成功之后就会来到这里执行then里面的匿名函数
+            // 获取服务器响应过来的数据: response.data
+            // console.log(response);
+            console.log(response.data);
+        })
+    }
+</script>
+</body>
+</html>

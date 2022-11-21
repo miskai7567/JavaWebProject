@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/axios-0.18.0.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+<div id="app">
+    <div>
+<!--        <a href="addBrand.html">-->
+<!--            <input type="button" value="新增">-->
+<!--        </a><br>-->
+        <input type="button" value="新增" @click="goToAddBrand()"><br>
+    </div>
+    <hr>
+    <table id="brandTable" border="1" cellspacing="0" width="100%">
+
+        <tr>
+            <th>序号</th>
+            <th>品牌名称</th>
+            <th>企业名称</th>
+            <th>排序</th>
+            <th>品牌介绍</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        <tr v-for="brand in Data">
+            <td>{{brand.id}}</td>
+            <td>{{brand.brandName}}</td>
+            <td>{{brand.companyName}}</td>
+            <td>{{brand.ordered}}</td>
+            <td>{{brand.description}}</td>
+            <!--方式一: 服务器通过fastjson工具包,把对象转换为json字符串的时候,做数据转换-->
+            <!--<td>{{brand.statusStr}}</td>-->
+            <!--方式二: 前端进行判断显示-->
+            <!--<td>{{brand.status}}</td>-->
+            <td v-if="brand.status == 0">禁用</td>
+            <td v-if="brand.status == 1">启用</td>
+            <td>
+                <a :href="'updateBrand.html?id='+brand.id">修改</a>
+                <a href="#" @click="updateById(brand.id)">修改2</a>
+                <a href="#" @click="deleteById(brand.id)">删除</a>
+            </td>
+        </tr>
+    </table>
+</div>
+
+</body>
+<script>
+    new Vue({
+        el:"#app",
+        data:{Data:[]},
+        methods:{goToAddBrand(){location.href="addBrand.html"},
+            deleteById(id) {
+                // 弹出确认框
+                var flag = confirm("确定要删除id为" + id + "的记录吗?");
+                // 判断
+                if (flag) {
+                    // 发送请求,进行删除
+                    axios.get("deleteBrand?id=" + id).then(response => {
+                        // console.log(response.data);
+                        if (response.data == "success") {
+                            location.href = "brand.html";
+                        }
+                    })
+                }
+            }
+            // ,
+            // updateById(id) {
+            //                 location.href = "updateBrand2.html?id"+id;
+            // }
+        },
+        mounted(){
+            axios.get("findAll").then(response=>{
+                console.log(response.data)
+                this.Data=response.data;
+            })
+        }
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // // 页面加载完成就发送异步请求查询所有
+    // window.onload = function () {
+    //     // 发送异步请求---查询所有
+    //     axios.post("findAll").then(function (response) {
+    //         console.log(response.data);
+    //
+    //
+    //         // 定义一个变量,用来存储表格的表头和所有的行数据
+    //         var tableData = "<tr>\n" +
+    //             "        <th>序号</th>\n" +
+    //             "        <th>品牌名称</th>\n" +
+    //             "        <th>企业名称</th>\n" +
+    //             "        <th>排序</th>\n" +
+    //             "        <th>品牌介绍</th>\n" +
+    //             "        <th>状态</th>\n" +
+    //             "        <th>操作</th>\n" +
+    //             "    </tr>";
+    //
+    //         for (let i = 0;i<response.data.length;i++){
+    //             // 获取数组中的一个元素---brand对象
+    //             var brand = response.data[i];
+    //
+    //             var  status = "";
+    //             /*if (brand.status == 0){
+    //                 status = "禁用"
+    //             }else{
+    //                 status = "启用";
+    //             }*/
+    //             status = brand.status == 0 ? "禁用" : "启用";
+    //
+    //             tableData += "<tr align=\"center\">\n" +
+    //                 "        <td>"+brand.id+"</td>\n" +
+    //                 "        <td>"+brand.brandName+"</td>\n" +
+    //                 "        <td>"+brand.companyName+"</td>\n" +
+    //                 "        <td>"+brand.ordered+"</td>\n" +
+    //                 "        <td>"+brand.description+"</td>\n" +
+    //                 "        <td>"+status+"</td>\n" +
+    //                 "        <td><a href=\"#\">修改</a> <a href=\"#\">删除</a></td>\n" +
+    //                 "    </tr>";
+    //         }
+    //
+    //         // document.getElementById("brandTable").innerHTML = "表格的表头和所有的行数据";
+    //         document.getElementById("brandTable").innerHTML = tableData;
+    //     })
+    // }
+</script>
+</html>

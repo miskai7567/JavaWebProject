@@ -1,0 +1,6 @@
+0:0:0:0:0:0:0:1 - - [09/Nov/2022:08:33:56 +0800] "GET /day HTTP/1.1" 302 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [09/Nov/2022:08:33:56 +0800] "GET /day/ HTTP/1.1" 404 959 http-bio-8080-exec-3 10
+0:0:0:0:0:0:0:1 - - [09/Nov/2022:08:33:56 +0800] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [09/Nov/2022:08:34:05 +0800] "GET /day/login.html HTTP/1.1" 200 410 http-bio-8080-exec-5 5
+0:0:0:0:0:0:0:1 - - [09/Nov/2022:08:34:07 +0800] "POST /day/ServletLogin HTTP/1.1" 302 - http-bio-8080-exec-6 821
+0:0:0:0:0:0:0:1 - - [09/Nov/2022:08:34:07 +0800] "GET /day/failed.html HTTP/1.1" 200 161 http-bio-8080-exec-7 4

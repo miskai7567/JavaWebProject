@@ -1,0 +1,19 @@
+# 项目排除路径
+/day30_brandDemo/target/
+/day31_spring/day31_demo1_ioc/target/
+/day31_spring/day31_demo2_di/target/
+/day31_spring/day31_demo3_di/target/
+/day32_spring/day32_demo1_annotation/target/
+/day32_spring/day32_demo2_annotation/target/
+/day32_spring/day32_demo3_annotation_pure/target/
+/day32_spring/day32_demo4_mybatis/target/
+/day32_spring/day32_demo5_mybatis_xml/target/
+/day32_spring/day32_demo6_mybatis_annotation/target/
+/day32_spring/day32_demo7_junit/target/
+/day33_spring/day33_demo1_aop_xml/target/
+/day33_spring/day33_demo2_aop_annotation/target/
+/day33_spring/day33_demo3_transaction_xml/target/
+/day33_spring/day33_demo4_transaction_annotation/target/
+/Homework24/target/
+/Misaki/target/
+/work/target/

@@ -1,0 +1,11 @@
+com\itheima\web\AddBrandServlet.class
+com\itheima\dao\BrandDao.class
+com\itheima\web2\UserServlet.class
+com\itheima\bean\Brand.class
+com\itheima\web\FindAllServlet.class
+com\itheima\web2\BrandServlet.class
+com\itheima\web2\BaseServlet.class
+com\itheima\utils\SqlSessionUtils.class
+com\itheima\web\BrandServlet.class
+com\itheima\service\BrandService.class
+com\itheima\web\UserServlet.class

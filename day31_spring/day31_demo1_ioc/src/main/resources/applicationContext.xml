@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--
+         bean标签：
+            作用： 用来登记类，告诉spring要创建这个类的对象
+            属性：
+                id: 唯一的标识，以后使用这个标识来问spring要对象！
+                name: 用来配置别名，可以配置多个别名，使用 逗号、分号、 空格 来间隔
+                class: 要写实现类的全路径
+
+                    <bean id="us" name="a,b;c d" class="com.itheima.service.impl.UserServiceImpl"/>
+                    <bean id="us2" class="com.itheima.service.impl.UserServiceImpl02"/>
+
+                scope: 用来控制创建的对象是单例还是多例
+                    singleton: 单例 : 默认就是单例！
+                    prototype: 多例
+
+                  <bean id="us"  class="com.itheima.service.impl.UserServiceImpl" scope="singleton"/>
+                init-method:
+                    singleton:
+                        只要创建了工厂，就会调用这个方法，只会调用一次！
+                    prototype:
+                        只有当问工厂要对象的时候，才会调用这个方法，问多少次就会调用多少次
+                destroy-method:
+                    singleton:
+                        只要销毁了工厂【一般不销毁工厂！】，就会调用这个方法，只会调用一次！
+                    prototype:
+                         调用销毁工厂的方法，不会执行destroy方法。
+
+                 <bean id="us"  class="com.itheima.service.impl.UserServiceImpl" scope="prototype" init-method="init" destroy-method="destroy"/>
+    -->
+
+    <!--1. 以后当我们拿着us的名字来问spring的工厂要对象的时候，spring的工厂
+        会调用StaticFactory类里面的getBean方法得到对象
+    2. 然后返回给我们-->
+   <!-- <bean id="us" class="com.itheima.factory.StaticFactory" factory-method="getBean"/>-->
+
+
+
+   <!-- 1.当我们拿着us来问spring的工厂要对象的时候
+    2. spring就会问factory对应的那个对象的getBean方法要对象！
+        2.1 当然spring在一开始就会创建出来factory对应的对象-->
+    <bean id="factory" class="com.itheima.factory.InstanceFactory"/>
+    <bean id="us" factory-bean="factory" factory-method="getBean"/>
+</beans>

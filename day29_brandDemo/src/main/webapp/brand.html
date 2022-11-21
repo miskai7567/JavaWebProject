@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .el-table .warning-row {
+            background: oldlace;
+        }
+
+        .el-table .success-row {
+            background: #f0f9eb;
+        }
+    </style>
+<script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+<div id="app" style="height: 800px;overflow-y: auto">
+
+
+    <template>
+        //target属性的值指向的就是外层你滚动区域的类名
+        /*visibility-height需要的是一个number，所以需要v-bind绑定；
+        *补充（v-bind缩写:）
+        */
+        <el-backtop  :visibility-height=0></el-backtop>
+
+    </template>
+    <!--搜索表单-->
+    <el-form :inline="true" :model="brandForm" class="demo-form-inline">
+
+        <el-form-item label="当前状态">
+            <el-select v-model="brandForm.status" placeholder="当前状态">
+                <el-option label="启用" value="1"></el-option>
+                <el-option label="禁用" value="0"></el-option>
+            </el-select>
+        </el-form-item>
+
+        <el-form-item label="企业名称">
+            <el-input v-model="brandForm.companyName" placeholder="企业名称"></el-input>
+        </el-form-item>
+
+        <el-form-item label="品牌名称">
+            <el-input v-model="brandForm.brandName" placeholder="品牌名称"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+            <el-button type="primary" @click="onSubmit">查询</el-button>
+        </el-form-item>
+    </el-form>
+
+    <!--按钮-->
+    <el-row>
+
+        <el-button type="danger" plain>批量删除</el-button>
+        <el-button type="primary" plain @click="openDialog()">新增</el-button>
+
+    </el-row>
+
+    <!--添加数据对话框表单-->
+    <el-dialog
+            title="编辑品牌"
+            :visible.sync="dialogVisible"
+            width="30%"
+            >
+
+        <!--
+            现象: 添加一次之后,不刷新brand.html页面,再次打开添加品牌的对话框,对话框中有前一次添加的数据
+            原因:对话框中的表单和brand数据模型进行了绑定,第一次添加品牌的时候,就把数据赋值给了brand数据模型,那么第二次打开对话框中的表单的时候
+            这个表单就已经获取到了brand数据模型中的数据(也就是第一次添加的数据)
+            解决: 第二次打开的时候,要清空brand数据模型中的数据
+                1.为新增按钮绑定点击事件,执行对应的函数
+                2.在函数中,先清空brand数据模型中的数据,然后打开对话框
+
+        -->
+
+        <el-form ref="form" :model="brand" label-width="80px">
+            <el-form-item label="品牌名称">
+                <el-input v-model="brand.brandName"></el-input>
+            </el-form-item>
+
+            <el-form-item label="企业名称">
+                <el-input v-model="brand.companyName"></el-input>
+            </el-form-item>
+
+            <el-form-item label="排序">
+                <el-input v-model="brand.ordered"></el-input>
+            </el-form-item>
+
+            <el-form-item label="备注">
+                <el-input type="textarea" v-model="brand.description"></el-input>
+            </el-form-item>
+
+            <el-form-item label="状态">
+                <el-switch v-model="brand.status"
+                           active-value="1"
+                           inactive-value="0"
+                ></el-switch>
+            </el-form-item>
+
+
+            <el-form-item>
+                <el-button type="primary" @click="addBrand">提交</el-button>
+                <el-button @click="dialogVisible = false">取消</el-button>
+            </el-form-item>
+        </el-form>
+
+    </el-dialog>
+
+
+    <!--表格-->
+    <template>
+        <el-table
+                :data="tableData"
+                style="width: 100%"
+                :row-class-name="tableRowClassName"
+                @selection-change="handleSelectionChange"
+        >
+            <el-table-column
+                    type="selection"
+                    width="55">
+            </el-table-column>
+            <el-table-column
+                    type="index"
+                    width="50">
+            </el-table-column>
+
+            <el-table-column
+                    prop="brandName"
+                    label="品牌名称"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="companyName"
+                    label="企业名称"
+                    align="center"
+            >
+            </el-table-column>
+            <el-table-column
+                    prop="ordered"
+                    align="center"
+                    label="排序">
+            </el-table-column>
+            <el-table-column
+                    prop="statusStr"
+                    align="center"
+                    label="当前状态">
+            </el-table-column>
+
+            <el-table-column
+                    align="center"
+                    label="操作">
+
+                <el-row>
+                    <el-button type="primary">修改</el-button>
+                    <el-button type="danger">删除</el-button>
+                </el-row>
+
+            </el-table-column>
+
+        </el-table>
+
+
+    </template>
+
+    <!--分页工具条-->
+    <el-pagination
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            :page-size="5"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="400">
+    </el-pagination>
+
+</div>
+
+
+<script src="js/vue.js"></script>
+<script src="element-ui/lib/index.js"></script>
+<link rel="stylesheet" href="element-ui/lib/theme-chalk/index.css">
+
+<script>
+    new Vue({
+        el: "#app",
+        methods: {
+            tableRowClassName({row, rowIndex}) {
+                if (rowIndex === 1) {
+                    return 'warning-row';
+                } else if (rowIndex === 3) {
+                    return 'success-row';
+                }
+                return '';
+            },
+            // 复选框选中后执行的方法
+            handleSelectionChange(val) {
+                this.multipleSelection = val;
+
+                console.log(this.multipleSelection)
+            },
+            // 查询方法
+            onSubmit() {
+                console.log(this.brand);
+            },
+            // 添加数据
+            addBrand(){
+                console.log(this.brand);
+                // 发送请求,携带数据
+                axios.post("brand/addBrand",this.brand).then(response=>{
+                    // console.log(response.data);
+                    if (response.data == "success") {
+                        // 如果添加成功---1.关闭对话框;  2.弹出添加成功提示框;  3.刷新页面刷新页面中的表格数据
+                        //1.关闭对话框;
+                        this.dialogVisible = false;
+
+                        //2.弹出添加成功提示框;
+                        this.$message({
+                            message: '恭喜你，添加成功',
+                            type: 'success'
+                        });
+
+                        // 3.刷新页面中的表格数据----查询所有
+                        this.findAll();
+                    }else {
+                        // 如果添加失败---1.关闭对话框;  2.弹出添加失败提示框;
+                        this.dialogVisible = false;
+                        this.$message.error('很遗憾,添加失败');
+                    }
+                })
+            },
+
+            //分页
+            handleSizeChange(val) {
+                console.log(`每页 ${val} 条`);
+            },
+            handleCurrentChange(val) {
+                console.log(`当前页: ${val}`);
+            },
+
+            // 查询所有
+            findAll(){
+                axios.get("brand/selectAll").then(response=>{
+                    // console.log(response.data);
+                    this.tableData = response.data;
+                })
+            },
+            openDialog(){
+                // 1.清空brand数据模型中的数据
+                this.brand = {
+                    status: 0,
+                    brandName: '',
+                    companyName: '',
+                    id:"",
+                    ordered:"",
+                    description:""
+                };
+
+                // 2.打开对话框
+                this.dialogVisible = true;
+
+            }
+
+        },
+        data() {
+            return {
+                // 当前页码
+                currentPage: 4,
+                // 添加数据对话框是否展示的标记
+                dialogVisible: false,
+
+                // 搜索表单的品牌模型数据
+                brandForm: {
+                    status: '',
+                    brandName: '',
+                    companyName: '',
+                    id:"",
+                    ordered:"",
+                    description:""
+                },
+
+                // 品牌模型数据
+                brand: {
+                    status: '',
+                    brandName: '',
+                    companyName: '',
+                    id:"",
+                    ordered:"",
+                    description:""
+                },
+                // 复选框选中数据集合
+                multipleSelection: [],
+                // 表格数据
+                tableData: []
+            }
+        },
+        mounted(){
+            // 发送异步请求
+            /*axios.get("findAll").then(response=>{
+                // console.log(response.data);
+                this.tableData = response.data;
+            })*/
+
+            this.findAll();
+        }
+    })
+
+</script>
+
+</body>
+</html>

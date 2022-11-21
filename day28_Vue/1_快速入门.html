@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+
+<!--定义一个视图-->
+<div id="app">
+    <!--实现数据模型和视图的绑定,数据模型中的数据改变了,插值表达式中的值就会改变-->
+    <!--插值表达式是用来获取数据模型中的数据的-->
+    {{username}}---{{age}}---{{flag}}
+</div>
+
+<script>
+    // 创建Vue对象
+    new Vue({
+        // vue对象接管了id为app的div视图
+        el:"#app",
+        // 定义数据模型
+        /*data(){
+            return{
+                username:"zhangsan",
+                age:18,
+                flag:true
+            }
+        }*/
+
+        data:{
+            username:"lisi",
+            age:19,
+            flag:false
+        }
+        ,
+        methods:{
+            // 定义函数,多个函数之间使用逗号隔开
+        }
+    });
+
+    // 通用的Vue对象
+    /*new Vue({
+        el:"#app",
+        data:{},
+        methods:{}
+    });*/
+
+
+</script>
+</body>
+</html>

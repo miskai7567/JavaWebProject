@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--1. 把UserDaoImpl交给spring管理-->
+    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"/>
+
+    <!--
+        2. 把UserServiceImpl交给spring管理
+          constructor-arg :
+            作用： 用来完成依赖注入的，用来匹配有参构造。
+            属性：
+                name: 形参名字
+                ref : 注入的是一个对象，写的是其他对象的id值
+                value : 注入的是一个普通数据，基本类型或者是字符串
+    -->
+    <bean id="us" class="com.itheima.service.impl.UserServiceImpl02">
+        <constructor-arg name="userDao" ref="userDao"/>
+        <constructor-arg name="address" value="北京"/>
+    </bean>
+
+</beans>

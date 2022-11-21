@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.BrandDao">
+    <select id="findAll" resultMap="resultMapId">
+        select * from tb_brand
+    </select>
+
+    <resultMap id="resultMapId" type="brand">
+        <result column="brand_name" property="brandName"></result>
+        <result column="company_name" property="companyName"></result>
+    </resultMap>
+
+    <insert id="addBrand">
+        insert into tb_brand (brand_name, company_name, ordered, description, status) values (#{brandName},#{companyName},#{ordered},#{description},#{status})
+    </insert>
+
+    <select id="findById" resultMap="resultMapId">
+        select * from tb_brand where id = #{id}
+    </select>
+
+    <update id="updateBrand">
+        update tb_brand set brand_name = #{brandName},company_name = #{companyName}, ordered = #{ordered}, description = #{description}, status = #{status} where id = #{id}
+    </update>
+</mapper>

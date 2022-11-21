@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.BrandDao">
+    <!--查询结果的映射方案-->
+    <resultMap id="brandResultMap" type="brand">
+        <result column="brand_name" property="brandName"></result>
+        <result column="company_name" property="companyName"></result>
+    </resultMap>
+
+    <select id="findAll" resultMap="brandResultMap">
+        select * from tb_brand
+    </select>
+
+    <insert id="addBrand">
+        insert into tb_brand values(null,#{brandName},#{companyName},#{ordered},#{description},#{status})
+    </insert>
+
+    <delete id="batchDeleteBrand">
+        delete from tb_brand
+        <where>
+            <foreach collection="ids" item="id" open="id in(" separator="," close=")">
+                #{id}
+            </foreach>
+        </where>
+
+    </delete>
+
+    <select id="findTotalCount" resultType="int">
+        select count(*) from tb_brand
+    </select>
+
+    <select id="findPage" resultMap="brandResultMap">
+        select * from tb_brand limit #{begin},#{pageSize}
+    </select>
+
+    <select id="findTotalCountByCondition" resultType="int">
+        select count(*) from tb_brand
+        <where>
+            <if test="brandName != null and brandName != ''">
+                brand_name like concat('%',#{brandName},'%')
+            </if>
+            <if test="companyName != null and companyName != ''">
+                and company_name like concat('%',#{companyName},'%')
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
+
+    <select id="findPageByCondition" resultMap="brandResultMap">
+        select * from tb_brand
+
+        <where>
+            <if test="brand.brandName != null and brand.brandName != ''">
+                brand_name like concat('%',#{brand.brandName},'%')
+            </if>
+            <if test="brand.companyName != null and brand.companyName != ''">
+                and company_name like concat('%',#{brand.companyName},'%')
+            </if>
+            <if test="brand.status != null">
+                and status = #{brand.status}
+            </if>
+        </where>
+
+        limit #{begin},#{pageSize}
+    </select>
+
+    <update id="updateBrand">
+        update tb_brand set brand_name=#{brandName},company_name=#{companyName},ordered=#{ordered},description=#{description},status=#{status} where id = #{id}
+    </update>
+
+    <delete id="deleteBrand">
+        delete from tb_brand where id = #{id}
+    </delete>
+
+</mapper>

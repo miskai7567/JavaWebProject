@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.itheima.dao.BrandDao">
+    <!--查询结果的映射方案-->
+    <resultMap id="brandResultMap" type="brand">
+        <result column="brand_name" property="brandName"></result>
+        <result column="company_name" property="companyName"></result>
+    </resultMap>
+
+    <select id="findAll" resultMap="brandResultMap">
+        select * from tb_brand
+    </select>
+
+    <insert id="addBrand">
+        insert into tb_brand values(null,#{brandName},#{companyName},#{ordered},#{description},#{status})
+    </insert>
+
+</mapper>

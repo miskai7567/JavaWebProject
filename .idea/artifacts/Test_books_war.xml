@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="Test_books:war">
+    <output-path>$PROJECT_DIR$/../Test_books/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>Test_books</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="Test_books-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="Test_books:war exploded" />
+    </root>
+  </artifact>
+</component>

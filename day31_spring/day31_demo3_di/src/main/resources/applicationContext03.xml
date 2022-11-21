@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--1. 把UserDaoImpl交给spring管理-->
+    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"/>
+
+    <!--
+        2. 把UserServiceImpl交给spring管理
+            2.1 如果属性是普通类型，那么就使用 p:属性名=""
+            2.2 如果属性是对象类型，那么就使用 p:属性名-ref=""
+    -->
+    <bean id="us" class="com.itheima.service.impl.UserServiceImpl03" p:address="广州" p:userDao-ref="userDao"/>
+
+</beans>

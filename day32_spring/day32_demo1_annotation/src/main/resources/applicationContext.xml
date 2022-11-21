@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--
+        扫描组件，用来识别类身上的注解。
+            1. 需要指定一个扫描的包，可以是一个前缀包名，也可以是一个具体的包名。
+                如果有多个包名要写，可以使用 逗号 、分号 、空格来间隔
+                <context:component-scan base-package="com.itheima.dao.impl,com.itheima.service.impl"/>
+            2. 通常我们会写一个前缀包名即可。
+                <context:component-scan base-package="com.itheima"/>
+
+            3. 背后的工作方式：
+                3.1 根据这个包名，找到包下【包括子孙包】下的所有类的字节码 Class对象
+                3.2 识别类上是否有注解！ @Component， 接着进一步识别类中的成员是否有注解 @Autowired
+    -->
+    <context:component-scan base-package="com.itheima"/>
+</beans>

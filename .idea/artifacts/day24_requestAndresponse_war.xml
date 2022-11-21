@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="day24_requestAndresponse:war">
+    <output-path>$PROJECT_DIR$/day24_requestAndresponse/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>day24_requestAndresponse</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="day24_requestAndresponse-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="day24_requestAndresponse:war exploded" />
+    </root>
+  </artifact>
+</component>

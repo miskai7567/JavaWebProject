@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mybatis="http://mybatis.org/schema/mybatis-spring"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring.xsd">
+
+    <!--1. 扫描包-->
+    <context:component-scan base-package="com.itheima"/>
+
+    <!--创建DataSource-->
+
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql://localhost:3306/day32?useSSL=false"/>
+        <property name="username" value="root"/>
+        <property name="password" value="root"/>
+    </bean>
+
+
+    <!--2. 创建SqlSessionFactoryBean对象
+        2.1 只有创建它的对象，它才会创建出来SqlSessionFactory，然后把这个factory丢到IOC容器中管理
+        2.2 背后就可以 通过factory获取到SqlSession对象
+        2.3 有了这个SqlSession对象就可以在dao的代理对象里面对接口方法的具体实现中，操作数据库了！    
+    -->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="typeAliasesPackage" value="com.itheima.bean"/>
+    </bean>
+
+
+    <!--3. 让spring发现dao的接口，然后创建出来它的代理对象，进而把它存储到IOC容器中。以便以后在service注入进来-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.itheima.dao"/>
+    </bean>
+</beans>

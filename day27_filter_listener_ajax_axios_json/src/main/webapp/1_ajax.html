@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="button" value="发送同步请求" onclick="f1()">
+<input type="button" value="发送异步请求" onclick="f2()">
+
+<script>
+    function f1() {
+        // 发送同步请求
+        location.href = "AjaxServlet";
+    }
+
+    function f2() {
+        // 发送异步请求---使用Ajax技术
+        // 1.创建XMLHttpRequest对象
+        var xmlhttp;
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+        } else {// code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        // 2.发送请求
+        xmlhttp.open("GET","AjaxServlet",true);
+        xmlhttp.send()
+
+        // 3.获取服务器响应的数据----xmlhttp.responseText
+        //onreadystatechange是一个事件属性,每当 XMLHttpRequest对象的 readyState 属性改变时，就会调用该函数。
+        xmlhttp.onreadystatechange = function () {
+            // readyState属性是用来 存有 XMLHttpRequest 的状态 : 0到4
+            // console.log(xmlhttp.readyState);\
+            // xmlhttp.readyState == 4 说明请求已完成，且响应已就绪
+            // xmlhttp.status == 200 响应成功
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200){
+                // 获取服务器响应的数据
+                console.log(xmlhttp.responseText);
+            }
+        }
+    }
+</script>
+</body>
+</html>

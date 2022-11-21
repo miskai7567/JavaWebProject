@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="js/axios-0.18.0.js"></script>
+</head>
+<body>
+<input type="button" value="发送axios的post请求" onclick="f1()">
+<script>
+    function f1() {
+        // 发送axios的post请求
+        axios.post("AxiosServlet","username=wangwu").then(function (response) {
+            console.log(response.data);
+        })
+
+    }
+</script>
+</body>
+</html>

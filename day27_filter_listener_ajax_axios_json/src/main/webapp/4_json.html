@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // 定义js对象
+    var jsObj = {
+        username:"zhangsan",
+        age:18
+    };
+
+    // 定义对象类型的json
+    var jsonS1 = {
+        "username":"zhangsan",
+        "age":18
+    };
+    console.log(jsonS1.username);
+    console.log(jsonS1.age);
+
+    console.log("--------------");
+
+    // 定义数组类型的json
+    var jsonS2 = ["itheima","itcast",18];
+    console.log(jsonS2[0]);
+    console.log(jsonS2[1]);
+    console.log(jsonS2[2]);
+
+    console.log("--------------");
+
+    // 定义混合类型的json
+    var jsonS3 = {
+        "username":"lisi",
+        "age":20,
+        "hobby":["basketball","football","coding",100,{"k1":"v1","k2":"v2"}],
+        "flag":true
+    };
+    console.log(jsonS3.hobby[0]);// basketball
+    console.log(jsonS3.hobby[4].k2);// v2
+    console.log("--------------");
+
+    var jsonS4 = [
+        "itheima",
+        19,
+        false,
+        {
+            "username":"lisi",
+            "age":20,
+            "hobby":["basketball","football","coding",100,{"k1":"v1","k2":"v2"}],
+            "flag":true
+        }
+    ];
+    console.log(jsonS4[3].hobby[4].k2);
+
+</script>
+</body>
+</html>

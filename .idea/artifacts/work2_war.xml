@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="work2:war">
+    <output-path>$PROJECT_DIR$/work2/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>false</exploded>
+        <module>work2</module>
+        <packaging>war</packaging>
+        <unpackNestedArchives>false</unpackNestedArchives>
+      </options>
+    </properties>
+    <root id="archive" name="work-1.0-SNAPSHOT.war">
+      <element id="artifact" artifact-name="work2:war exploded" />
+    </root>
+  </artifact>
+</component>

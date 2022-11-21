@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!--1. 把UserDaoImpl交给spring管理-->
+    <bean id="userDao" class="com.itheima.dao.impl.UserDaoImpl"/>
+
+    <!--
+        2. 把UserServiceImpl交给spring管理
+
+        property标签：
+            作用：用来注入对象|简单数据，它一定要匹配set方法。
+            属性：
+                name: set方法去掉set单词之后，首字母小写的名字 setUserDao  ==> userDao
+                ref: 表示要给属性注入对象类型的数据，要写的是其他对象的id值。
+                value: 表示要给属性注入普通类型的数据，基本数据类型 或者是 字符串类型
+    -->
+    <bean id="us" class="com.itheima.service.impl.UserServiceImpl">
+        <property name="address" value="深圳"/>
+        <property name="userDao" ref="userDao"/>
+    </bean>
+
+</beans>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>修改品牌</title>
+    <script src="js/axios-0.18.0.js"></script>
+    <script src="js/vue.js"></script>
+    <script src="js/getParameter.js"></script>
+</head>
+<body>
+<div id="app">
+    <h3>修改</h3>
+    <form action="" method="post">
+        品牌名称：<input id="brandName" name="brandName" v-model="brand.brandName"><br>
+        企业名称：<input id="companyName" name="companyName" v-model="brand.companyName"><br>
+        排序：<input id="ordered" name="ordered" v-model="brand.ordered"><br>
+        描述信息：<textarea rows="5" cols="20" id="description" name="description" v-model="brand.description"></textarea><br>
+        状态：
+        <input type="radio" name="status" value="0" v-model="brand.status">禁用
+        <input type="radio" name="status" value="1" v-model="brand.status">启用<br>
+
+        <input type="button" id="btn"  value="提交" @click="updateBrand()">
+    </form>
+</div>
+
+<script>
+    new Vue({
+        el:"#app",
+        data:{
+            brand:{
+                id:'',
+                brandName: '',
+                companyName: '',
+                ordered:'',
+                description:'',
+                status:''
+            }
+        },
+        methods:{
+            updateBrand(){
+                // 发送异步请求---携带参数
+                axios.post("updateBrand",this.brand).then(response=>{
+                    if (response.data == "success") {
+                        location.href = "brand.html"
+                    }
+                })
+            }
+
+        },
+        mounted(){
+            // 获取传入的id
+            var id = getParameter("id");
+            // console.log(id)
+            // 发送异步请求
+            axios.get("findById?id="+id).then(response=>{
+                console.log(response.data);
+                this.brand = response.data;
+            })
+
+        }
+    });
+</script>
+
+</body>
+</html>

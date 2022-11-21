@@ -1,0 +1,5 @@
+com\itheima\dao\UserDao.class
+com\itheima\web\ServletLogin.class
+com\itheima\bean\User.class
+com\itheima\utils\SqlSessionFactoryUtils.class
+com\itheima\web\ServletRegister.class

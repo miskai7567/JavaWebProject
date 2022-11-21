@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+        2. 把UserServiceImpl交给spring管理
+    -->
+    <bean id="us" class="com.itheima.service.impl.UserServiceImpl06" >
+
+        <property name="userDao" ref="userDao"/>
+
+        <property name="array" >
+            <array>
+                <value>array01</value>
+                <value>array02</value>
+                <value>array03</value>
+            </array>
+        </property>
+
+        <property name="list">
+            <list>
+                <value>list01</value>
+                <value>list02</value>
+                <value>list03</value>
+            </list>
+        </property>
+
+
+        <property name="set">
+            <set>
+                <value>set01</value>
+                <value>set02</value>
+                <value>set03</value>
+            </set>
+        </property>
+
+
+        <property name="map">
+            <map>
+                <entry key="name" value="张三"/>
+                <entry key="age" value="18" />
+            </map>
+        </property>
+
+        <property name="properties">
+            <props>
+                <prop key="username">admin</prop>
+                <prop key="password">123456</prop>
+            </props>
+        </property>
+
+    </bean>
+
+</beans>

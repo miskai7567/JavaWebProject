@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="day32_demo7_junit" />
+        <module name="work" />
+        <module name="day32_demo1_annotation" />
+        <module name="Misaki" />
+        <module name="day31_Demo" />
+        <module name="day33_demo2_aop_annotation" />
+        <module name="day33_demo3_transaction_xml" />
+        <module name="day33_demo1_aop_xml" />
+        <module name="Test_books" />
+        <module name="day32_demo3_annotation_pure" />
+        <module name="day32_demo2_annotation" />
+        <module name="day31_demo2_di" />
+        <module name="day33_demo4_transaction_annotation" />
+        <module name="Homework24" />
+        <module name="day31_spring" />
+        <module name="day32_demo6_mybatis_annotation" />
+        <module name="day30_brandDemo" />
+        <module name="day31_demo3_di" />
+        <module name="day32_demo5_mybatis_xml" />
+        <module name="day31_demo1_ioc" />
+        <module name="day32_spring" />
+        <module name="day33_spring" />
+        <module name="day32_demo4_mybatis" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="day23_servlet" target="1.8" />
+      <module name="day24_RegisterAndLogin" target="1.8" />
+      <module name="day24_requestAndresponse" target="1.8" />
+      <module name="day25_cookieAndSession" target="1.8" />
+      <module name="day25_RegisterAndLogin" target="1.8" />
+      <module name="day26" target="1.8" />
+      <module name="day26_brand_demo" target="1.8" />
+      <module name="day27_brandDemo" target="1.8" />
+      <module name="day27_filter_listener_ajax_axios_json" target="1.8" />
+      <module name="day27_RegisterAndLogin" target="1.8" />
+      <module name="day28_brandDemo" target="1.8" />
+      <module name="day29_brandDemo" target="1.8" />
+      <module name="day30_brandDemo" target="1.8" />
+      <module name="day31_Demo" target="1.8" />
+      <module name="day31_demo1_ioc" target="1.8" />
+      <module name="day31_demo2_di" target="1.8" />
+      <module name="day31_demo3_di" target="1.8" />
+      <module name="day31_spring" target="1.8" />
+      <module name="day32_demo1_annotation" target="1.8" />
+      <module name="day32_demo2_annotation" target="1.8" />
+      <module name="day32_demo3_annotation_pure" target="1.8" />
+      <module name="day32_demo4_mybatis" target="1.8" />
+      <module name="day32_demo5_mybatis_xml" target="1.8" />
+      <module name="day32_demo6_mybatis_annotation" target="1.8" />
+      <module name="day32_demo7_junit" target="1.8" />
+      <module name="day32_spring" target="1.8" />
+      <module name="day33_demo1_aop_xml" target="1.8" />
+      <module name="day33_demo2_aop_annotation" target="1.8" />
+      <module name="day33_demo3_transaction_xml" target="1.8" />
+      <module name="day33_demo4_transaction_annotation" target="1.8" />
+      <module name="day33_spring" target="1.8" />
+      <module name="demo" target="1.8" />
+      <module name="demo2" target="1.8" />
+      <module name="Homework24" target="1.8" />
+      <module name="kaoshi" target="1.8" />
+      <module name="Misaki" target="1.8" />
+      <module name="MisakiWork" target="1.8" />
+      <module name="misakiWork" target="1.8" />
+      <module name="Test_books" target="1.8" />
+      <module name="work" target="1.8" />
+      <module name="work2" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

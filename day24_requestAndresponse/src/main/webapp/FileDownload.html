@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--
+如果浏览器不支持该格式文件,那么就会提示进行下载,
+如果浏览器支持这个格式(eg: png, jpg....)的文件,那么直接打开,不再下载了
+-->
+<h1>超链接方式下载文件(不推荐)</h1>
+<a href="download/a.jpg">下载a.jpg</a><br/><br/>
+<a href="download/b.txt">下载b.txt</a><br/><br/>
+<a href="download/web01.zip">下载web01.zip</a><br/><br/>
+<hr/>
+
+<h1>硬编码方式下载文件(不推荐)</h1>
+<a href="ServletDownload?fileName=a.jpg">下载a.jpg</a><br/><br/>
+<a href="ServletDownload?fileName=b.txt">下载b.txt</a><br/><br/>
+<a href="ServletDownload?fileName=web01.zip">下载web01.zip</a><br/><br/>
+<a href="ServletDownload?fileName=美女.jpg">下载美女.jpg</a><br/><br/>
+<a href="ServletDownload?fileName=霉女.jpg">下载霉女.jpg</a><br/><br/>
+
+</body>
+</html>

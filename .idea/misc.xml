@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="web" url="file://$PROJECT_DIR$/../day31_Demo" />
+    <file type="web" url="file://$PROJECT_DIR$/day23_servlet" />
+    <file type="web" url="file://$PROJECT_DIR$/day24_RegisterAndLogin" />
+    <file type="web" url="file://$PROJECT_DIR$/day24_requestAndresponse" />
+    <file type="web" url="file://$PROJECT_DIR$/day25_cookieAndSession" />
+    <file type="web" url="file://$PROJECT_DIR$/day25_RegisterAndLogin" />
+    <file type="web" url="file://$PROJECT_DIR$/day26" />
+    <file type="web" url="file://$PROJECT_DIR$/day26_brand_demo" />
+    <file type="web" url="file://$PROJECT_DIR$/day27_brandDemo" />
+    <file type="web" url="file://$PROJECT_DIR$/day27_filter_listener_ajax_axios_json" />
+    <file type="web" url="file://$PROJECT_DIR$/day27_RegisterAndLogin" />
+    <file type="web" url="file://$PROJECT_DIR$/day28_brandDemo" />
+    <file type="web" url="file://$PROJECT_DIR$/day29_brandDemo" />
+    <file type="web" url="file://$PROJECT_DIR$/day30_brandDemo" />
+    <file type="web" url="file://$PROJECT_DIR$/demo" />
+    <file type="web" url="file://$PROJECT_DIR$/demo2" />
+    <file type="web" url="file://$PROJECT_DIR$/Homework24" />
+    <file type="web" url="file://$PROJECT_DIR$/Misaki" />
+    <file type="web" url="file://$PROJECT_DIR$/MisakiWork" />
+    <file type="web" url="file://$PROJECT_DIR$/work" />
+    <file type="web" url="file://$PROJECT_DIR$/work2" />
+    <file type="web" url="file://$PROJECT_DIR$/../kaoshi" />
+    <file type="web" url="file://$PROJECT_DIR$/../Test_books" />
+  </component>
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/Homework24/pom.xml" />
+        <option value="$PROJECT_DIR$/Misaki/pom.xml" />
+        <option value="$PROJECT_DIR$/day30_brandDemo/pom.xml" />
+        <option value="$PROJECT_DIR$/day31_spring/pom.xml" />
+        <option value="$PROJECT_DIR$/day31_spring/day31_demo1_ioc/pom.xml" />
+        <option value="$PROJECT_DIR$/day31_spring/day31_demo2_di/pom.xml" />
+        <option value="$PROJECT_DIR$/day31_spring/day31_demo3_di/pom.xml" />
+        <option value="$PROJECT_DIR$/work/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo1_annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo2_annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo3_annotation_pure/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo4_mybatis/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo5_mybatis_xml/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo6_mybatis_annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/day32_spring/day32_demo7_junit/pom.xml" />
+        <option value="$PROJECT_DIR$/../Test_books/pom.xml" />
+        <option value="$PROJECT_DIR$/../day31_Demo/pom.xml" />
+        <option value="$PROJECT_DIR$/day33_spring/pom.xml" />
+        <option value="$PROJECT_DIR$/day33_spring/day33_demo2_aop_annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/day33_spring/day33_demo3_transaction_xml/pom.xml" />
+        <option value="$PROJECT_DIR$/day33_spring/day33_demo4_transaction_annotation/pom.xml" />
+        <option value="$PROJECT_DIR$/day33_spring/day33_demo1_aop_xml/pom.xml" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

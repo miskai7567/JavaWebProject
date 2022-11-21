@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <!--1. 把这两个类都交给spring管理-->
+    <bean id="us" class="com.itheima.service.impl.UserServiceImpl"/>
+    <bean id="myAdvice" class="com.itheima.advice.MyAdvice"/>
+
+    <!--
+        2. 配置AOP
+            aop:config: 用来配置AOP
+              aop:aspect ： 用来配置切面 【切面就是用来包裹：扩展出来的的功能方法和被扩展的方法】
+                ref: 扩展出来的那个功能类的对象 id值。
+              aop:before: 表示前置增强 【 调用目标方法之前，先调用扩展出来的功能方法！】
+                method：想用扩展出来的功能类中的什么方法来做增强。 print方法
+                pointcut : 描述切入点，具体是哪个方法想要被增强 【可以是一个方法、一类方法、所有方法】
+    -->
+    <aop:config>
+        <aop:aspect ref="myAdvice">
+
+            <!--<aop:before method="print" pointcut="execution( public void com.itheima.service.impl.UserServiceImpl.add())"/>-->
+            <!--<aop:before method="print" pointcut="execution( void com.itheima.service.impl.UserServiceImpl.add())"/>-->
+            <!--<aop:before method="print" pointcut="execution( * com.itheima.service.impl.UserServiceImpl.add())"/>-->
+            <!--<aop:before method="print" pointcut="execution( * com.itheima..UserServiceImpl.add())"/>-->
+            <!--<aop:before method="print" pointcut="execution( * com.itheima..*.add())"/>-->
+            <!--<aop:before method="print" pointcut="execution( * com.itheima..*.*())"/>-->
+            <!--<aop:before method="print" pointcut="execution( * com.itheima..*.*(..))"/>-->
+            <!--<aop:before method="print" pointcut="execution( * com..*.*(..))"/>-->
+            <!--<aop:before method="print" pointcut="execution( * *..*.*(..))"/>-->
+
+
+            <aop:before method="print" pointcut="execution( * com.itheima..*.*(..))"/>
+        </aop:aspect>
+
+    </aop:config>
+</beans>

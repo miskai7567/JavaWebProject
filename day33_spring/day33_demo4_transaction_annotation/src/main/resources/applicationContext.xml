@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--1. 扫描包-->
+    <context:component-scan base-package="com.itheima"/>
+
+    <context:property-placeholder location="db.properties"/>
+
+    <!--创建数据源-->
+    <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource">
+        <property name="driverClassName" value="${db.driverClassName}"/>
+        <property name="url" value="${db.url}"/>
+        <property name="username" value="${db.username}"/>
+        <property name="password" value="${db.password}"/>
+    </bean>
+
+    <!--2. 配置MapperScannerConfigurer-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="com.itheima.dao"/>
+    </bean>
+
+    <!--3. 配置SqlSessionFactoryBean-->
+    <bean class="org.mybatis.spring.SqlSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!--4. 配置事务-->
+
+    <!--
+        4.1 配置事务的管理员
+            4.1.1 到底用哪个事务管理员，取决于dao层使用的是什么计数
+            4.1.2 如果使用的是mybatis， 那么管理员就是DataSourceTransactionManager
+            4.1.3 如果使用的是Hibernate，那么管理员就是HibernateTransactionManager
+
+            4.1.4 管理员的工作就是：开启事务，提交事务，回滚事务！
+                开启事务： conn.setAutoCommit(false);
+                提交事务： conn.commit();
+                回滚事务： conn.rollback();
+    -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+
+    <!--打开注解的开关-->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+</beans>

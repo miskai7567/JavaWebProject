@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--properties:引入配置文件-->
+    <!--resource:指定配置文件的路径-->
+    <properties resource="jdbc.properties"></properties>
+
+    <!--取别名-->
+    <typeAliases>
+        <!--对单个javaBean取别名-->
+        <!--<typeAlias type="com.itheima.bean.User" alias="user"></typeAlias>-->
+        <!--<typeAlias type="com.itheima.bean.Brand" alias="brand"></typeAlias>-->
+
+        <!--整个包下的所有类都取别名-->
+        <package name="com.example.homework24.bean"/>
+
+    </typeAliases>
+
+    <!--配置数据库的环境  default:使用哪个环境-->
+    <environments default="development">
+        <!--配置数据库连接的环境-->
+        <!--id: 是当前环境的唯一标识-->
+        <environment id="development">
+            <!--配置事务管理  type: 配置事务的类型    JDBC:使用的是JDBC的事务-->
+            <transactionManager type="JDBC"/>
+            <!--配置连接池  type:配置连接池的类型 POOLED: 使用mybatis默认的连接池   UNPOOLED:不使用连接池-->
+            <dataSource type="POOLED">
+                <!--配置连接参数-->
+                <!--driver: 驱动-->
+                <!--url: 路径-->
+                <!--username:用户名-->
+                <!--password:密码-->
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+
+        <environment id="a">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <mappers>
+        <!--单个配置: 配置Dao映射文件的路径-->
+        <!--<mapper resource="com/itheima/dao/UserDao.xml"/>-->
+
+        <!--单个配置: 配置Dao接口的路径-->
+        <!--<mapper class="com.itheima.dao.UserDao"></mapper>-->
+
+        <!--批量配置: 配置Dao接口的包-->
+        <package name="com.example.homework24.dao"/>
+
+    </mappers>
+
+</configuration>
